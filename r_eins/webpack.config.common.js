@@ -21,9 +21,9 @@ module.exports = {
             test: /\.css$/,
             loader: 'style!css'
         },
-        { 
-            test: /\.svg$/, 
-            loader: 'svg-loader' 
+        {
+            test: /\.svg$/,
+            loader: 'file-loader'
         }
         ]
 }};
