@@ -25,7 +25,6 @@ class Link2 extends Component {
                 <Link to='/link3'>Link-3</Link>
             </li>
         </ul>
-        <p>hallöchen</p>
       </div>
     );
   }
