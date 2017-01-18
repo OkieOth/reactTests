@@ -1,6 +1,6 @@
 This is a second react example based on r_zwei
 
-It integrates react-router and redux
+It integrates react-router and use a redirect 
 
 ... still in progress
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route} from 'react-router';
+import { Router, Route, Redirect } from 'react-router';
 import { createHashHistory } from 'history';
 //import { Router, Route,browserHistory} from 'react-router';
 import App from './App';
@@ -13,7 +13,8 @@ import './index.css';
 const history = createHashHistory();
 
 const router = <Router history={history}>
-        <Route path='/' component={App} />
+        <Redirect from='/' to='/app' />
+        <Route path='/app' component={App} />
         <Route path='/link1' component={Link1} />
         <Route path='/link2' component={Link2} />
         <Route path='/link3' component={Link3} />
