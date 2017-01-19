@@ -2,6 +2,7 @@
 logs
 *.log
 *.swp
+.idea
 npm-debug.log*
 
 dist

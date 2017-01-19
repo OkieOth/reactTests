@@ -10,7 +10,7 @@ export default class Link3 extends React.Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>I'm Link-3</h2>
+          <h2>I'm Link-3 (r_drei)</h2>
         </div>
         <ul>
             <li>
