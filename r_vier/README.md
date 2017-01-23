@@ -1,6 +1,4 @@
-A simple application that uses redux for state handling 
-
-... still in progress
+A simple TypeScript based application that uses redux for state handling 
 
 ```bash
 npm install typescript --save-dev
