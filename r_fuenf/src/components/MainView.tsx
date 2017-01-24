@@ -3,7 +3,7 @@ import React, {} from 'react';
 const style = require("../App.css");
 const logo = require("../logo.svg");
 
-interface IAppProps extends React.Props<any> {
+export interface IAppProps extends React.Props<any> {
     getCLICKED_1x: () => void;
     getCLICKED_2x: () => void;
     getCLICKED_3x: () => void;
@@ -51,5 +51,6 @@ export class MainView extends React.Component<IAppProps, void> {
         );
     }
 }
+
 
 

@@ -2,15 +2,20 @@
  * Created by eiko on 23.01.17.
  */
 import * as ActionTypes from "../types/action_types";
-import { createStore } from 'redux';
 import { connect } from 'react-redux';
-import MainView from "../components/MainView"
+import * as MainView from "../components/MainView"
 
 const CLICKED_1 = "ONE_CLICKED";
 const CLICKED_2 = "TWO_CLICKED";
 const CLICKED_3 = "THREE_CLICKED";
 
-class MainView_State {
+interface IState {
+        clickCount1: number;
+        clickCount2: number;
+        clickCount3: number;
+}
+
+class MainView_State implements IState {
     clickCount1: number;
     clickCount2: number;
     clickCount3: number;
@@ -43,36 +48,37 @@ class MainView_Actions {
 }
 
 
-const initialState =  new MainView_State(0,0,0);
+const initialState: IState =  new MainView_State(0,0,0);
 
-class MainView_Reducer {
-    static reduce (state: MainView_State = initialState, action : ActionTypes.IBaseAction ): MainView_State  {
-        switch (action.type) {
-            case CLICKED_1:
-                console.log("reducer: clicked_1: clickCount="+state.clickCount1);
-                return new MainView_State(state.clickCount1 + 1,state.clickCount2,state.clickCount3);
-            case CLICKED_2:
-                console.log("reducer: clicked_2: clickCount="+state.clickCount2);
-                return new MainView_State(state.clickCount1,state.clickCount2+1,state.clickCount3);
-            case CLICKED_3:
-                console.log("reducer: clicked_3: clickCount="+state.clickCount3);
-                return new MainView_State(state.clickCount1,state.clickCount2,state.clickCount3+1);
-            default:
-                console.log("reducer: default");
-                return state;
-        }
-    };
-}
-function mapStateToProps(state: MainView_State) {
-    console.log("mapStateToProps: state"+state.clickCount1);
+export function mainViewReducer (state: IState = initialState, action : ActionTypes.IBaseAction ): IState {
+    switch (action.type) {
+        case CLICKED_1:
+            console.log("reducer: clicked_1: clickCount="+state.clickCount1);
+            return new MainView_State(state.clickCount1 + 1,state.clickCount2,state.clickCount3);
+        case CLICKED_2:
+            console.log("reducer: clicked_2: clickCount="+state.clickCount2);
+            return new MainView_State(state.clickCount1,state.clickCount2+1,state.clickCount3);
+        case CLICKED_3:
+            console.log("reducer: clicked_3: clickCount="+state.clickCount3);
+            return new MainView_State(state.clickCount1,state.clickCount2,state.clickCount3+1);
+        default:
+            console.log("reducer: default");
+            return state;
+    }
+};
+
+
+function mapStateToProps(state) {
+    console.log("mapStateToProps: state"+state.mainView.clickCount1);
     return {
-        clickCount1: state.clickCount1,
-        clickCount2: state.clickCount2,
-        clickCount3: state.clickCount3
+        clickCount1: state.mainView.clickCount1,
+        clickCount2: state.mainView.clickCount2,
+        clickCount3: state.mainView.clickCount3
     };
 }
 
 function mapDispatchToProps(dispatch) {
+    console.log("mapDispatchToProps :)");
     return {
         getCLICKED_1x: () => {
             console.log("getClicked1");
@@ -89,8 +95,5 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainView);
-
-export const store = createStore(MainView_Reducer.reduce);
+export const mainViewCont = connect(mapStateToProps, mapDispatchToProps)(MainView.MainView);
 
