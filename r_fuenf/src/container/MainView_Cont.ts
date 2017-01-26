@@ -1,9 +1,10 @@
 /**
  * Created by eiko on 23.01.17.
  */
+
 import * as ActionTypes from "../types/action_types";
 import { connect } from 'react-redux';
-import * as MainView from "../components/MainView"
+import { MainView } from "../components/MainView"
 
 const CLICKED_1 = "ONE_CLICKED";
 const CLICKED_2 = "TWO_CLICKED";
@@ -27,26 +28,23 @@ class MainView_State implements IState {
     }
 }
 
-class MainView_Actions {
-    static createClick_1(): ActionTypes.IBaseAction  {
-        return {
-            type: CLICKED_1
-        }
+const createClick_1 = (): ActionTypes.IBaseAction => {
+    return {
+        type: CLICKED_1
     }
+};
 
-    static createClick_2(): ActionTypes.IBaseAction {
-        return {
-            type: CLICKED_2
-        }
+const createClick_2 = (): ActionTypes.IBaseAction => {
+    return {
+        type: CLICKED_2
     }
+};
 
-    static createClick_3(): ActionTypes.IBaseAction {
-        return {
-            type: CLICKED_3
-        }
+const createClick_3 = (): ActionTypes.IBaseAction => {
+    return {
+        type: CLICKED_3
     }
-}
-
+};
 
 const initialState: IState =  new MainView_State(0,0,0);
 
@@ -82,18 +80,18 @@ function mapDispatchToProps(dispatch) {
     return {
         getCLICKED_1x: () => {
             console.log("getClicked1");
-            dispatch(MainView_Actions.createClick_1());
+            dispatch(createClick_1());
         },
         getCLICKED_2x: () => {
             console.log("getClicked2");
-            dispatch(MainView_Actions.createClick_2());
+            dispatch(createClick_2());
         },
         getCLICKED_3x: () => {
             console.log("getClicked3");
-            dispatch(MainView_Actions.createClick_3());
+            dispatch(createClick_3());
         }
     };
 }
 
-export const mainViewCont = connect(mapStateToProps, mapDispatchToProps)(MainView.MainView);
+export const mainViewCont = connect(mapStateToProps, mapDispatchToProps)(MainView);
 
