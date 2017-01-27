@@ -1,0 +1,48 @@
+apply plugin: 'java'
+
+group 'react.tests'
+version '1.0-SNAPSHOT'
+
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+targetCompatibility = '1.8'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    compile 'com.beust:jcommander:1.12'
+    compile 'com.sparkjava:spark-core:2.5'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.5.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.1'
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'ch.qos.logback:logback-classic:1.0.9'
+}
+
+task dependenciesToLibDir(type: Copy) {
+    into "$buildDir/release/lib"
+    from configurations.runtime
+}
+
+task buildRelease (type: Copy) {
+    into "${buildDir}/release/lib"
+    from "${buildDir}/libs"
+
+    copy {
+        from "${project.rootDir}/src/main/bin"
+        into "${buildDir}/release"
+        include 'r_06_server.sh'
+    }
+    copy {
+        from "${project.rootDir}/src/main/conf"
+        into "${buildDir}/release/conf"
+        include 'logback.xml'
+    }
+}
+
+dependenciesToLibDir.dependsOn jar
+buildRelease.dependsOn dependenciesToLibDir
