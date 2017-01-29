@@ -1,7 +1,9 @@
 import React, {} from 'react';
 
-const style = require("../App.css");
-const logo = require("../logo.svg");
+const style = require("../resources/css/App.css");
+const logo = require("../resources/logo.svg");
+const verlauf = require("../resources/pics/verlauf.png")
+
 
 export interface IAppProps extends React.Props<any> {
     getCLICKED_1x: () => void;
@@ -22,7 +24,7 @@ export const MainView = (props: IAppProps) => {
         <div className="App">
             <div className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <h2>Welcome to React r_sechs :)</h2>
+                <h2>Welcome to React r_sechs :)))</h2>
             </div>
             <div className="btns">
                 <button onClick={ props.getCLICKED_1x }>ONE</button>
@@ -44,6 +46,9 @@ export const MainView = (props: IAppProps) => {
                         <span>{ printValue("clickCount3", props.clickCount3) }</span>
                     </p>
                 </div>
+            </div>
+            <div>
+                <img src={verlauf}/>
             </div>
         </div>
     );

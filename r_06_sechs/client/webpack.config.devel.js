@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+  const webpack = require('webpack');
 const common = require('./webpack.config.common');
 
 const devConfig = Object.assign({}, common, {

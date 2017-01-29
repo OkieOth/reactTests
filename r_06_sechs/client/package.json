@@ -32,8 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "build:clean": "rimraf ./public/dist",
+    "build:clean": "rimraf ./public/r_06",
     "build:prod": "npm run build:clean && cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "devserver": "./node_modules/.bin/webpack-dev-server --inline --hot --config webpack.config.devel.js --content-base public/"
+    "devserver": "./node_modules/.bin/webpack-dev-server --host 0.0.0.0 --inline --hot --config webpack.config.devel.js --content-base public/"
   }
 }

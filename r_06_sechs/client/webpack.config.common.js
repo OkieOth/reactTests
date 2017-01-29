@@ -6,9 +6,9 @@ module.exports = {
         './src/index.tsx'
     ],
     output:  {
-        path:       path.join(__dirname, 'public/dist'),
+        path:       path.join(__dirname, 'public/r_06'),
         filename:   'r_sechs_app.js',
-        publicPath: '/dist'
+        publicPath: '/r_06/'
     },
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
@@ -27,7 +27,11 @@ module.exports = {
         {
             test: /\.svg$/,
             loader: 'file-loader'
-        }
+        },
+            {
+                test: /\.png$/,
+                loader: 'file-loader'
+            }
         ],
         preLoaders: [
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
