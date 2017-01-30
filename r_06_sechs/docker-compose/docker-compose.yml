@@ -11,7 +11,7 @@ services:
         depends_on:
             - npm
         ports:
-                - "8000:80"
+                - "8080:80"
         networks:
             - r_06_sechs
     npm:

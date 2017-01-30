@@ -3,6 +3,7 @@ logs
 *.log
 *.swp
 .idea
+.vagrant
 npm-debug.log*
 
 dist

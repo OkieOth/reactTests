@@ -24,7 +24,7 @@ export const MainView = (props: IAppProps) => {
         <div className="App">
             <div className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <h2>Welcome to React r_sechs :)))</h2>
+                <h2>Welcome to React r_sechs :-D</h2>
             </div>
             <div className="btns">
                 <button onClick={ props.getCLICKED_1x }>ONE</button>
