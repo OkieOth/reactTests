@@ -12,24 +12,31 @@ $startDockerComposeEnv = <<DOCKERCOMPOSEENV
     if ! [ -d /opt/reactTests ]; then
         # check for existing old containers ...
         docker rm -f r06_httpd_1
-        docker rm -f r06_npm_1
         cd /opt/
         curl -Ls https://codeload.github.com/OkieOth/reactTests/zip/master -o reactTests.zip
         unzip reactTests.zip && rm -f reactTests.zip && mv reactTests-master reactTests
         pushd /opt/reactTests/r_06_sechs/docker-compose > /dev/null
             # modify the directory to use as base for react project
-            mv docker-compose.yml docker-compose.yml.orig
-            cat docker-compose.yml.orig | sed -e 's-../client:-/opt/myproject:-' > docker-compose.yml
+            mv vagrant-docker-compose.yml docker-compose.yml
+            # backup of original http-config
+            mv httpd/conf/extra.conf httpd/conf/extra.conf.orig
         popd
         sudo chown -R ubuntu:ubuntu /opt/reactTests
     fi
+    # set proxy ip for webpack-dev-server
+    ipAddr=`ifconfig enp0s8 | grep 'inet addr' | grep Bcast | awk '{print $2}' | sed 's/addr://'`
+    ipAddr=${ipAddr%.*}
+    ipAddr=${ipAddr}.1
+    
+    pushd /opt/reactTests/r_06_sechs/docker-compose/httpd/conf > /dev/null
+    cat extra.conf.orig | sed -e "s/npm/$ipAddr/" > extra.conf
+    popd > /dev/null
     /opt/reactTests/r_06_sechs/docker-compose/bin/start.sh
 DOCKERCOMPOSEENV
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
-  config.vm.synced_folder "../client", "/opt/myproject"
   config.vm.network "private_network", type: "dhcp"
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "4096"
