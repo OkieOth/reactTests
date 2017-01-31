@@ -9,5 +9,4 @@ place to collect the steps of dive into react js
 * r_05_fuenf - based on r_vier but better splits components and container
 * r_06_sechs - based on r_05_fuenf, with moved root context and a basic setup for apache proxy
 * r_07_sieben - simple OpenStreetmap Example (not implemented yet)
-* r_08_acht - simple Leaflet example (not implemented yet)
-* r_09_neun - combines Openstreetman and Leaflet in one app (redux,react-router) (not implemented yet) 
+* r_08_acht - simple redux project with nested components
