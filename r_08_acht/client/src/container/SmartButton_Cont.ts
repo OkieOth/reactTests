@@ -1,57 +1,76 @@
 import * as ActionTypes from "../types/action_types";
 import { connect } from 'react-redux';
-import { SmartButton,ISmartButtonPropsBase } from "../components/SmartButton"
+import { SmartButton, ISmartButtonPropsBase } from "../components/SmartButton"
+import {IBaseAction} from "../types/action_types";
 
 
 const CLICKED = "ONE_CLICKED2";
 
 interface ISmartButtonState {
-    captionBase: string;
-    clickCount: number;
+    clickCount: { [key:string]:number; };
 }
 
 class SmartButtonState implements ISmartButtonState {
-    captionBase: string;
-    clickCount: number;
-    constructor (s:string,c:number) {
-        this.captionBase = s;
+    clickCount: { [key:string]:number; };
+
+    constructor (c:{ [key:string]:number; }) {
         this.clickCount = c;
     }
 }
 
-const createClick = (): ActionTypes.IBaseAction => {
+interface ISmartButtonAction extends IBaseAction {
+    key: string;
+}
+
+const createClick = ( name:string ): ISmartButtonAction => {
     return {
-        type: CLICKED
+        type: CLICKED,
+        key: name
     }
 };
 
-const initialState : ISmartButtonState = new SmartButtonState("hallo",0);
+const initialState : ISmartButtonState = new SmartButtonState({});
 
-export function smartButtonReducer (state: ISmartButtonState = initialState, action : ActionTypes.IBaseAction ): ISmartButtonState {
+function cloneClickCount(clickCount:{ [key:string]:number; }) {
+    return {
+        "Smart-1": clickCount["Smart-1"],
+        "Smart-2": clickCount["Smart-2"]
+    };
+}
+
+export function smartButtonReducer (state: ISmartButtonState = initialState, action : ISmartButtonAction ): ISmartButtonState {
     switch (action.type) {
         case CLICKED:
             console.log("smartButtonReducer-> clicked: clickCount="+state.clickCount);
-            return new SmartButtonState(state.captionBase,state.clickCount + 1);
+            let clickCount = state.clickCount;
+            if (clickCount[action.key]) {
+                clickCount[action.key] = clickCount[action.key]+1;
+                console.log("smartButtonReducer-> clicked-1-1: clickCount="+clickCount[action.key]);
+            }
+            else {
+                clickCount[action.key] = 1;
+                console.log("smartButtonReducer-> clicked-1-2: clickCount="+clickCount[action.key]);
+            }
+            return new SmartButtonState(cloneClickCount(clickCount));
         default:
-            console.log("smartButtonReducer-> default: "+state.captionBase);
             return state;
     }
 }
 
 function mapStateToProps(state):ISmartButtonPropsBase {
-    console.log("smartButton->mapStateToProps");
+    console.log("smartButton->mapStateToProps-1: "+state.smartButton.clickCount["state-1"]);
+    console.log("smartButton->mapStateToProps-2: "+state.smartButton.clickCount["state-2"]);
     return {
-        clickCount: state.smartButton.clickCount,
-        captionBase: state.smartButton.captionBase
+        clickCount: state.smartButton.clickCount
     };
 }
 
 function mapDispatchToProps(dispatch) {
     console.log("smartButton->mapDispatchToProps :)");
     return {
-        clickFunc: () => {
+        clickFunc: (name:string) => {
             console.log("getClicked");
-            dispatch(createClick());
+            dispatch(createClick(name));
         }
     };
 }

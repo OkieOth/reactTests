@@ -34,7 +34,8 @@ export const MainView = (props: IAppProps) => {
                 <button onClick={ props.getCLICKED_3x }>THREE</button>
                 <DumbButton caption="Dumb brother of THREE" clickFunc={ props.getCLICKED_3x } clickCount={props.clickCount3}/>
                 <DumbButton caption="Dumb brother of ONE" clickFunc={ props.getCLICKED_1x } clickCount={props.clickCount1}/>
-                <SmartButton.smartButtonCont />
+                <SmartButton.smartButtonCont name="Smart-1"/>
+                <SmartButton.smartButtonCont name="Smart-2"/>
             </div>
             <div>
                 <div>
