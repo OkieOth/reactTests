@@ -1,5 +1,6 @@
 import React, {} from 'react';
-import {MyMap} from "./MyMap";
+import * as MyMap from "../container/MyMap_Cont";
+import * as CapitalList from "../container/CapitalList_Cont";
 
 const style = require("../resources/css/App.css");
 
@@ -18,7 +19,12 @@ export const MainView = (props: IAppProps) => {
             <div className="App-header">
                 <h2>OpenLayers v3 Example</h2>
             </div>
-            <MyMap/>
+            <div className="leftCont floatStuff">
+                <CapitalList.capitalListCont/>
+            </div>
+            <div className="rightCont floatStuff">
+                <MyMap.myMapCont/>
+            </div>
         </div>
     );
 }

@@ -1,3 +1,8 @@
+body {
+    padding:0;
+    margin:0;
+}
+
 .App {
   text-align: center;
 }
@@ -22,7 +27,40 @@
     margin: 2em 0;
 }
 
+.floatStuff {
+    float: left;
+}
+
+.leftCont {
+    width:10%;
+    height:80%;
+}
+
+.leftCont ul {
+    list-style-type: none;
+    text-align: left;
+    margin-left: -1em;
+}
+
+.rightCont {
+    width:90%;
+    height:80%;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+.capitalEntry {
+    padding: 0.5em;
+}
+
+.capitalEntry:hover {
+    cursor:pointer;
+    background-color: #222222;
+    color: beige;
+}
+
+.active {
+    border: solid #0d0d0d thin;
 }
